@@ -1,0 +1,27 @@
+name: tester
+
+on:
+  Workflow_dispatch:
+    inputs:
+      text:
+        description: 'enter the work you want to add'
+        default: 'hello'
+        required: false
+        type: String
+
+env:
+  firstName: 'swapnil'
+  website: 'google.com'
+
+
+jobs:
+  context-demo:
+    runs-on: ${{matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        steps:
+
+          - run: echo ${{inputs.text}}
+          - run: echo ${{github.event.inputs.text}}
+          - run: echo 'Hi ${{ env.firstName }}'
