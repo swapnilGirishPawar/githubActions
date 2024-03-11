@@ -1,0 +1,20 @@
+name: unit-test
+
+#what is trigger -
+on:
+  push: #this is trigger
+    branches:
+      - master
+      - 'releases/**'
+    branches-ignore:
+      - devlop
+  workflow_dispatch:
+    inputs:
+      variable1:
+        description: 'web or android or iOS'
+        required: true
+        default: 'Android'
+      variable2:
+        description: 'second variable'
+        required: false
+        default: 'swapnil'
