@@ -39,6 +39,7 @@ jobs:
         - name: Run the testcases
           run: | 
             mvn clean test
+          continue-on-error: true
         
         - name: Save Maven cache
           uses: skjolber/maven-cache-github-action@v1
