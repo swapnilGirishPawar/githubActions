@@ -1,4 +1,4 @@
-name: android test run
+name: iOS test run
 
 
 on: workflow_dispatch # can be replaced by push
