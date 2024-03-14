@@ -1,0 +1,43 @@
+name: android test run
+
+
+on: workflow_dispatch # can be replaced by push
+jobs:
+  run-android-test:
+    runs-on: macos-latest # in macos runner come with maven packages, java and android emulators
+
+    steps:
+        - name: pull the project in to runner
+          uses: actions/checkout@v3
+
+        - name: setup the java 
+          uses: actions/setup-java@v3
+          with:
+            distribution: 'temurin'
+            java-version: '11'
+        
+        - name: setup the appium server # for iOS tests, we can install xcuitest driver.
+          run: |
+            npm install -g appium@next
+            appium -v
+            appium driver install uiutoamtor2
+            appium &>/dev/null &
+        
+        - name: Restore Maven cache
+          uses: skjolber/maven-cache-github-action@v1
+          continue-on-error: true
+          with:
+            step: restore
+
+        - name: run appium android tests
+          uses: reactivecircus/android-emulator-runner@v2
+          continue-on-error: true
+          with:
+            api-level: 29
+            script: mvn clean test -Pandroid test
+
+        - name: Save Maven cache
+          uses: skjolber/maven-cache-github-action@v1
+          continue-on-error: true
+          with:
+            step: save
