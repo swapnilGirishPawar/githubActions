@@ -20,7 +20,7 @@ jobs:
           run: |
             npm install -g appium@next
             appium -v
-            appium driver install uiutoamtor2
+            appium driver install uiautomator2
             appium &>/dev/null &
         
         - name: Restore Maven cache
