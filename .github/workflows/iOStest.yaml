@@ -3,7 +3,7 @@ name: android test run
 
 on:
   schedule:
-    - cron: '15 8 * * *'
+    - cron: '52 13 * * *'
 jobs:
   run-android-test:
     runs-on: macos-latest
