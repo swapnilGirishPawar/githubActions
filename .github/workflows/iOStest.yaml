@@ -1,9 +1,8 @@
-name: Schedule Job check
-
+name: Check schedule jobs
 
 on:
   schedule:
-    - cron: '35 8 * * *'
+    - cron: '5 * * * *'
   workflow_dispatch:
 
 jobs:
