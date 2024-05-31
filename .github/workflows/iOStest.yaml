@@ -1,9 +1,11 @@
-name: android test run
+name: Schedule Job check
 
 
 on:
   schedule:
     - cron: '52 13 * * *'
+  workflow_dispatch:
+
 jobs:
   run-android-test:
     runs-on: macos-latest
