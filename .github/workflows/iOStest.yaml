@@ -1,7 +1,9 @@
 name: android test run
 
 
-on: push # can be replaced by push
+on:
+  schedule:
+    - cron: '15 8 * * *'
 jobs:
   run-android-test:
     runs-on: macos-latest
