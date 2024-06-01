@@ -1,9 +1,6 @@
-name: Check schedule jobs
+name: Sanity Check - ${{ steps.get_date.outputs.date }}
 
-on:
-  schedule:
-    - cron:  '*/5 * * * *'
-  workflow_dispatch:
+on: [push, workflow_dispatch]
 
 jobs:
   run-android-test:
@@ -22,3 +19,10 @@ jobs:
       - name: Print today's date and time
         run: |
           mvn clean test -P date
+
+      - name: Get today's date
+        id: get_date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"  # Captures date in YYYY-MM-DD format
+
+      - name: Use today's date (example)
+        run: echo "Sanity check running on ${{ steps.get_date.outputs.date }}"
