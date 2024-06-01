@@ -1,8 +1,6 @@
 name: Sanity Check  - ${{ steps.get_date.outputs.date }}
 
-on:
-  schedule:
-    - cron: "0 0 * * *"  # Runs daily at midnight (UTC)
+on: [push, workflow_dispatch]
 
 jobs:
   sanity_check:
