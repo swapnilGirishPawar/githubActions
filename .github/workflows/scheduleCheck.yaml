@@ -1,19 +1,23 @@
-name: Sanity Check  - ${{ steps.get_date.outputs.date }}
+name: Check schedule jobs
 
-on: [push, workflow_dispatch]
+on:
+  workflow_dispatch:
+  pull_request:
 
 jobs:
-  sanity_check:
-    runs-on: ubuntu-latest  # Replace with your desired runner
+  run-android-test:
+    runs-on: macos-latest
 
     steps:
-      - uses: actions/checkout@v3  # Checkout your code
+      - name: pull the project in to runner
+        uses: actions/checkout@v3
 
-      - name: Get today's date
-        id: get_date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"  # Captures date in YYYY-MM-DD format
+      - name: setup the java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '11'
 
-      - name: Use today's date (example)
-        run: echo "Sanity check running on ${{ steps.get_date.outputs.date }}"
-
-      # Add your actual sanity check steps here
+      - name: Print today's date and time
+        run: |
+          mvn clean test -P date
